@@ -1,4 +1,4 @@
-package chap2.item1.ex1;
+package effectivejava.chap2.item1.ex1;
 
 public class Enemy {
     private int health;

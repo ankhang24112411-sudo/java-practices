@@ -1,4 +1,4 @@
-package chap2.item1.ex2;
+package effectivejava.chap2.item1.ex2;
 
  interface Payment {
     void pay();

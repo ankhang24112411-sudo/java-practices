@@ -1,4 +1,4 @@
-package TuHoc.Multithread.tayjava;
+package TuHoc.Multithread.tayjava.CountervaTestThread;
 
 public class Counter {
     private int count = 0;

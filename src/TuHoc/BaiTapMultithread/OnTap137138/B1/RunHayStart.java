@@ -1,4 +1,4 @@
-package TuHoc.BaiTapMultithread.B1;
+package TuHoc.BaiTapMultithread.OnTap137138.B1;
 
 public class RunHayStart{
 }
