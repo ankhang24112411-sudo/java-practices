@@ -1,4 +1,4 @@
-package TuHoc.Multithread.tayjava.CountervaTestThread;
+package TuHoc.BaiTapMultithread.CountervaTestThread;
 
 public class TestThread extends Thread{
     @Override

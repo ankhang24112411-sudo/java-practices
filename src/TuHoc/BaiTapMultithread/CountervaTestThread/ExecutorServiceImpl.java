@@ -1,4 +1,4 @@
-package TuHoc.Multithread.tayjava.CountervaTestThread;
+package TuHoc.BaiTapMultithread.CountervaTestThread;
 
 
 import java.util.concurrent.ExecutorService;
