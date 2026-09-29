@@ -1,43 +1,54 @@
 package TuHoc.BaiTapMultithread.ForkJoinPool;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.RecursiveAction;
+import java.util.concurrent.RecursiveTask;
 
-public class DefaultRecursiveAction extends RecursiveAction {
+public class DefaultRecursiveTask extends RecursiveTask<Integer> {
+
     private int workload = 0;
 
-    public DefaultRecursiveAction(int workload) {
+    public DefaultRecursiveTask(int workload) {
         this.workload = workload;
     }
 
     @Override
-    protected void compute() {
+    protected Integer compute() {
         if (this.workload < 18) {
             System.out.println("Doing workLoad myself in thread " + Thread.currentThread().getName()
                     + " with workload: " + this.workload);
+            return workload * 2;
         } else {
             System.out.println("Splitting workLoad in thread " + Thread.currentThread().getName()
                     + " with workload: " + this.workload);
-            List<DefaultRecursiveAction> subtasks = new ArrayList<>(createSubtasks());
-            for (RecursiveAction subtask : subtasks) {
+            List<DefaultRecursiveTask> subtasks = new ArrayList<>(createSubtasks());
+            for (RecursiveTask<Integer> subtask : subtasks) {
                 subtask.fork();
             }
 
             // Alternatively we may call next method
 //			ForkJoinTask.invokeAll(createSubtasks());
+
+            int result = 0;
+            for(DefaultRecursiveTask subtask : subtasks) {
+                result += subtask.join();
+            }
+            return result;
         }
     }
 
-    private List<DefaultRecursiveAction> createSubtasks() {
-        List<DefaultRecursiveAction> subtasks = new ArrayList<>();
+    private List<DefaultRecursiveTask> createSubtasks() {
+        List<DefaultRecursiveTask> subtasks = new ArrayList<>();
 
-        DefaultRecursiveAction subtask1 = new DefaultRecursiveAction(this.workload / 2);
-        DefaultRecursiveAction subtask2 = new DefaultRecursiveAction(this.workload / 2);
+        var subtask1 = new DefaultRecursiveTask(this.workload / 2);
+        var subtask2 = new DefaultRecursiveTask(this.workload / 2);
 
         subtasks.add(subtask1);
         subtasks.add(subtask2);
-        return subtasks;
 
+        return subtasks;
     }
+
 }
